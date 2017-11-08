@@ -8,6 +8,7 @@ var map;
 
 let Model = {
 
+            // settings for token for lufthansa API
             token : {
                 url: 'https://api.lufthansa.com/v1/oauth/token',
 
@@ -20,7 +21,7 @@ let Model = {
 
                     },
                 },
-
+            // settings for Lufthansa API
             airportsAPI : {
                 url: 'https://api.lufthansa.com/v1/references/airports/?lang=en&limit=100&offset=0&LHoperated=1',
 
@@ -34,6 +35,7 @@ let Model = {
                      },
             },
 
+            // settings for Weather API
             weatherAPI: {
                 init: {  method: 'GET',
                          mode: 'cors',
@@ -41,7 +43,7 @@ let Model = {
 
             },
 
-
+            // settings for Google MAPS API
             mapOptions: {
                 startLatLng: new google.maps.LatLng(32.898898,13.095172),
                 startZoom: 3,
@@ -229,8 +231,10 @@ let Controller = {
 
     },
 
+    // fetching data from LUFTHANSA
     fetchAirportsData: function () {
 
+                        // first fetching TOKEN
                         fetch(Model.token.url, Model.token.init)
                         .then((response) => {
                               if(response.ok) {
@@ -241,6 +245,8 @@ let Controller = {
                         })
                         .then((tokenjson) => {
                              token = tokenjson.access_token;
+
+                             // when fetching TOKEN done, it will fetch AIRPORTS data
                              fetch(Model.airportsAPI.url, {
                                           method: 'GET',
                                           headers: new Headers({
@@ -294,13 +300,9 @@ let Controller = {
 
 
 /* ======== View (Google Map) ======== */
-
-
-
-
-
 let ViewMap = {
 
+    // generating google map, settings from Model
     generateMap: function() {
                 var myOptions = {
                     zoom: Model.mapOptions.startZoom,
@@ -317,6 +319,7 @@ let ViewMap = {
 
     },
 
+    // generateing Markers
     generateMarker: function(i) {
         var marker = new google.maps.Marker({
             position : airportsData[i].latlng,
@@ -339,6 +342,7 @@ let ViewMap = {
         });
     },
 
+    // generating Info window and fetching weather data
     generateInfoWindow: function(i) {
         fetch(`https://api.apixu.com/v1/current.json?key=928964bcff1a4aa3ab891917172610&q=${airportsData[i].Position.Coordinate.Latitude},${airportsData[i].Position.Coordinate.Longitude}`, Model.weatherAPI.init)
         .then((response) => {
@@ -367,6 +371,7 @@ let ViewMap = {
 
     },
 
+    // what happens when marker is clicked
     markerClick: function(i) {
             this.resetMarkers(i);
             this.setCurrentMarker(i);
@@ -381,7 +386,7 @@ let ViewMap = {
         }
     },
 
-    // Removes the markers from the map, but keeps them in the array.
+    // Removes the markers from the map and reseting icon
       resetMarkers: function(i) {
           airportsData.forEach( function(el,i) {
               airportsData[i].marker.setAnimation(null);
@@ -403,11 +408,11 @@ let ViewMap = {
     // Deletes all markers in the array by removing references to them.
       deleteMarkers: function() {
         for (var i = 0; i < airportsData.length; i++) {
-
           airportsData[i].marker.setMap(null);
         }
     },
 
+    // centering and selecting current marker
     setCurrentMarker: function(i) {
         map.setZoom(5); //Zoom map view
         map.panTo(airportsData[i].latlng);
@@ -425,20 +430,21 @@ let ViewMap = {
         airportsData[i].marker.setIcon(iconSelected);
     },
 
-
+    // initialization for View Map
     init: function() {
 
         this.generateMap();
-
+        // generate markers on init
         airportsData.forEach( function(el, i) {
             ViewMap.generateMarker(i);
         });
-
+        // observe input and filter markers
         $('.filter').on('input', function() {
             ViewMap.render();
         });
     },
 
+    // rendering Map View
     render: function() {
         currentAirports = [];
         this.deleteMarkers();
@@ -464,7 +470,7 @@ let ViewMap = {
 var ViewList = function () {
     this.markers = [];
 
-    //Copies the values of initialLocations and stores them in sortedLocations(); observableArray
+    //Copies the values of airportsData and stores them in sortedLocations(); observableArray
     this.sortedLocations = ko.observableArray(airportsData);
 
     //Click on item in list view
