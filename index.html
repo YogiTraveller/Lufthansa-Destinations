@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Lufthansa Destinations - not official</title>
+
+        <link rel="stylesheet" href="css/reboot.css" />
+        <link rel="stylesheet" href="css/app.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+
+        <script type='text/javascript' src='js/knockout-3.4.2.js'></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw5t63lw534XVcVqbuAbXoLvNre-sdPzQ"></script>
+        <script defer src="js/app.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <h1>Lufthansa <em>Destinations</em></h1>
+            <p class="credits">
+                This is NOT official Lufthansa app, but all destinations data is delivered by official <a href="https://developer.lufthansa.com" target="_blank">Lufthansa API</a>,
+                weather information delivered from  <a href="https://www.apixu.com/" target="_blank">APIXU Api</a>
+            </p>
+        </header>
+
+        <aside class="aside">
+
+            <input class="filter" type="search" placeholder="Search for city or IATA Airport code" data-bind="textInput: query, valueUpdate: 'keyup'" />
+            <ul class="airports" data-bind="foreach: search">
+              <li class="airport" data-bind="text: $data.string, click: listViewClick"></p>
+            </ul>
+
+        </aside>
+
+        <main>
+            <button class="search-btn btn">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+            <section id="map"></section>
+            <section class="info-window">
+
+            </section>
+        </main>
+
+
+
+    </body>
+</html>

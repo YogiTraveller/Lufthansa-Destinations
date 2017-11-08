@@ -1,0 +1,315 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: "Helvetica neue", Helvetica, serif;
+    font-size: 0.85rem;
+    background: #333;
+
+}
+
+
+header {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #FFC130;
+    height: 80px;
+    box-shadow: 0 4px 8px -4px rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    header {
+        height: 40px;
+
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    height: calc(100% - 80px);
+    left: 0;
+    top: 80px;
+    position: fixed;
+    -webkit-transition: all 1s cubic-bezier(.84,-.42,0,1.37);
+         -o-transition: all 1s cubic-bezier(.84,-.42,0,1.37);
+            transition: all 1s cubic-bezier(.84,-.42,0,1.37);}
+
+.aside-visible main {
+    transform: translateX(25%);
+}
+
+    @media only screen and (max-width: 768px) {
+        main {
+            top: 40px;
+            height: calc(100% - 40px);
+        }
+        .aside-visible main {
+            transform: translateX(70%);
+        }
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 1250px) {
+        .aside-visible main {
+            transform: translateX(40%);
+        }
+    }
+
+aside {
+    width: 25%;
+    background: #333;
+    height: calc(100vh - 80px);
+    position: fixed;
+    top: 80px;
+    left: 0;
+    overflow: scroll;
+    transform: translateX(-100%);
+    -webkit-transition: all 1s cubic-bezier(.84,-.42,0,1.37);
+         -o-transition: all 1s cubic-bezier(.84,-.42,0,1.37);
+            transition: all 1s cubic-bezier(.84,-.42,0,1.37);
+}
+
+.aside-visible aside {
+    transform: translateX(0);
+}
+
+@media only screen and (max-width: 768px) {
+    aside {
+        width: 70%;
+        height: calc(100vh - 40px);
+        top: 40px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1250px) {
+    aside {
+        width: 40%;
+    }
+}
+
+h1 {
+    margin: 0;
+    color: #006;
+    line-height: 1;}
+
+    @media only screen and (max-width: 768px) {
+        h1 {
+            font-size: 1.1em;
+
+        }
+    }
+
+    h1 em {
+        color: #FFF;
+        font-style: normal;
+    }
+
+h2 {
+    font-size: 24px;
+    color: #006;
+    margin-bottom: 10px;
+}
+
+
+
+#map{
+    width: 100%;
+    height: 100%;
+}
+
+.airports {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.filter {
+    border: 2px solid #666;
+    border-radius: 10px;
+    padding: 0 30px 0 10px;
+    width: calc(100% - 30px);
+    margin: 15px 10px;
+    height: 32px;
+    line-height: 32px;
+    box-sizing: border-box;
+}
+
+.filter:focus {
+    border: 2px solid #FFC130;
+    outline-style: none;
+    box-shadow: none;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #333;
+    opacity: 0.3;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #909;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #909;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #909;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #909;
+}
+
+
+
+.airport {
+    color: #ebf2f3;
+    padding: 5px 20px;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.airport:hover{
+    background: #4F4C4C
+}
+
+.airport.selected {
+    background: #FFC130
+}
+
+.weather {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+
+.info-window {
+    background: #FFF;
+    color: #006;
+    font-weight: bold;
+    z-index: 3;
+    position: absolute;
+    top: 25%;
+    right: 50%;
+    transform: translateX(50%);
+    box-shadow: 0 4px 8px -4px rgba(0,0,0,0.75);
+    display: flex;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+    .info-window  {
+        top: 65px;
+        right: 15px;
+        width: calc(100% - 30px);
+        transform: translateX(0%);
+    }
+}
+
+
+.airport-info {
+    min-width: 50%;
+    background: #006;
+    color: #FFF;
+    padding: 10px;
+
+}
+.info-window p {
+    margin-bottom: 0;
+}
+
+
+.credits {
+    text-align: right;
+    margin: 0;
+    max-width: 300px;
+    font-size: 0.9em;
+}
+
+@media only screen and (max-width: 768px) {
+    .credits {
+        font-size: 0.7em;
+        line-height: 1
+    }
+}
+
+.info-window .temp  {
+    font-size: 20px;
+    letter-spacing: -0.05em;
+    line-height: 1;
+}
+.temp:after {
+    content: "\00b0";
+    position: relative;
+}
+
+.condition {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+
+.city {
+    font-size: 20px;
+}
+
+
+.btn {
+    background: #006;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    height: 3rem;
+    line-height: 2.8rem;
+    padding: 0px 3.8rem;
+    margin: 2rem 0 0 0;
+    cursor: pointer;
+    border: 0px;
+    font-weight: bold;
+    transition: all .2s ease;
+}
+
+.btn:hover {
+    background: #009;
+}
+
+.btn:focus,
+.btn:active {
+    outline-style: none;
+    box-shadow: none;
+}
+
+.search-btn {
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    z-index: 3;
+    margin: 0;
+    padding: 0px 1.8rem
+
+}
+
+.search-btn .fa-times {
+    display: none;
+}
+
+.aside-visible .search-btn .fa-times {
+    display: block;
+}
+.aside-visible .search-btn .fa-search {
+    display: none
+}
