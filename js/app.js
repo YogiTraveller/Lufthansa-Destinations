@@ -271,7 +271,7 @@ let Controller = {
                                       airportsData[i].latlng = {lat: airportsData[i].Position.Coordinate.Latitude, lng: airportsData[i].Position.Coordinate.Longitude};
                                       string =  airportsData[i].AirportCode + " - " + airportsData[i].Names.Name.$;
                                       airportsData[i].string = string;
-                                  })
+                                  });
                              })
                              .then(() => {
                                  ko.applyBindings(ViewList());
@@ -280,11 +280,11 @@ let Controller = {
                                   ViewMap.init();
                              }).catch((error) => {
                                error = 'Cound not get data from Lufthansa API';
-                               alert(error)
-                             })
+                               alert(error);
+                           });
                         }).catch((error) => {
                           error = 'Something went wrong with getting a token from Lufthansa API';
-                          alert(error)
+                          alert(error);
                         });
                         /* ; */
     },
@@ -361,11 +361,11 @@ let ViewMap = {
                 <p class="temp">${airportWeatherData.current.feelslike_c}</p>
                 <p class="condition"><img src="http:${airportWeatherData.current.condition.icon}" width="40" alt="${airportWeatherData.current.condition.text}"></p>
              </div>
-             `
-             $('.info-window').html(info)
+             `;
+             $('.info-window').html(info);
         }).catch((error) => {
           error = 'App cound not get weather data from the server';
-          alert(error)
+          alert(error);
         });
 
 
@@ -434,10 +434,12 @@ let ViewMap = {
     init: function() {
 
         this.generateMap();
+
         // generate markers on init
         airportsData.forEach( function(el, i) {
             ViewMap.generateMarker(i);
         });
+
         // observe input and filter markers
         $('.filter').on('input', function() {
             ViewMap.render();
@@ -449,7 +451,7 @@ let ViewMap = {
         currentAirports = [];
         this.deleteMarkers();
         $( ".airport" ).each(function() {
-          currentAirports.push($( this ).text())
+          currentAirports.push($( this ).text());
         });
 
         currentAirports.forEach( function(el, i) {
@@ -458,7 +460,7 @@ let ViewMap = {
                     ViewMap.generateMarker(x);
                 }
             }
-        })
+        });
 
     }
 };
