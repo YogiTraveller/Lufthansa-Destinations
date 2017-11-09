@@ -191,46 +191,13 @@ h2 {
 .weather {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 10px;
 }
-
-
-.info-window {
-    background: #FFF;
-    color: #006;
-    font-weight: bold;
-    z-index: 3;
-    position: absolute;
-    top: 25%;
-    right: 50%;
-    transform: translateX(50%);
-    box-shadow: 0 4px 8px -4px rgba(0,0,0,0.75);
-    display: flex;
-    border-radius: 3px;
-    overflow: hidden;
-}
-
-@media only screen and (max-width: 768px) {
-    .info-window  {
-        top: 65px;
-        right: 15px;
-        width: calc(100% - 30px);
-        transform: translateX(0%);
-    }
-}
-
 
 .airport-info {
     min-width: 50%;
-    background: #006;
-    color: #FFF;
-    padding: 10px;
+    color: #006;
+}
 
-}
-.info-window p {
-    margin-bottom: 0;
-}
 
 
 .credits {
@@ -247,11 +214,7 @@ h2 {
     }
 }
 
-.info-window .temp  {
-    font-size: 20px;
-    letter-spacing: -0.05em;
-    line-height: 1;
-}
+
 .temp:after {
     content: "\00b0";
     position: relative;
@@ -260,11 +223,6 @@ h2 {
 .condition {
     font-weight: 400;
     font-size: 16px;
-}
-
-
-.city {
-    font-size: 20px;
 }
 
 
@@ -312,4 +270,22 @@ h2 {
 }
 .aside-visible .search-btn .fa-search {
     display: none
+}
+.gm-style-iw > div {
+    width: auto !important
+}
+
+.gm-style-iw p {
+    margin-bottom: 0;
+}
+
+.gm-style-iw .city {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.gm-style-iw .temp  {
+    font-size: 20px;
+    letter-spacing: -0.05em;
+    line-height: 1;
 }

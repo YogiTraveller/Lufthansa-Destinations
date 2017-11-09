@@ -13,10 +13,12 @@
 
         <script type='text/javascript' src='js/knockout-3.4.2.js'></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw5t63lw534XVcVqbuAbXoLvNre-sdPzQ"></script>
         <script defer src="js/app.js"></script>
+
+        <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCw5t63lw534XVcVqbuAbXoLvNre-sdPzQ&callback=initMap" async defer onerror="mapError()"></script>
+
     </head>
-    <body>
+    <body data-bind="css: { 'aside-visible': toggleClass }" class="">
         <header class="header">
             <h1>Lufthansa <em>Destinations</em></h1>
             <p class="credits">
@@ -26,23 +28,20 @@
         </header>
 
         <aside class="aside">
+            <input class="filter" placeholder="Autocomplete from the list" data-bind="textInput: filter" />
 
-            <input class="filter" type="search" placeholder="Search for city or IATA Airport code" data-bind="textInput: query, valueUpdate: 'keyup'" />
-            <ul class="airports" data-bind="foreach: search">
-              <li class="airport" data-bind="text: $data.string, click: listViewClick"></p>
-            </ul>
-
+           <ul id="menu" class="airports" data-bind="foreach: filteredAirports">
+              <li class="airport" data-bind="text: fullName, click: $parent.clickAirportInList"></p>
+           </ul>
         </aside>
 
         <main>
-            <button class="search-btn btn">
+            <button class="search-btn btn" data-bind="click: clickSearch">
                 <i class="fa fa-search" aria-hidden="true"></i>
                 <i class="fa fa-times" aria-hidden="true"></i>
             </button>
             <section id="map"></section>
-            <section class="info-window">
 
-            </section>
         </main>
 
 
