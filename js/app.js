@@ -298,3 +298,7 @@ initMap = function () {
 };
 
 fetchAirportsData();
+
+var mapError = function() {
+    alert("There was a problem with loading Google Map");
+};
